@@ -1,0 +1,97 @@
+<%-include("partials/header", {css:"css/start.css", title: "InfinityLife: Your Future Self Awaits!" , metaDescription:"Embark on an epic journey through history with infinityLife. Create and evolve your character from ancient Rome to the modern era in this AI-powered historical evolution simulation game. Make strategic decisions, manage resources, and build a lasting legacy. Start your adventure today!"}) %>
+
+<h2 id="general_header">First, Create Yourself</h2>
+
+<div id="page1">
+    <p>What will you go by?</p>
+    <div class="name_buttons buttons_containers">
+        <input type="text" id="name" placeholder="Enter your name">
+        <button id="shuffle_button">
+            <img src="images/shuffle.svg" alt="Shuffle">
+        </button>
+    </div>
+
+
+    <p>Do you feel...</p>
+    <div class="gender_buttons buttons_containers"></div>
+    <button id="male_button" class="gender-button">
+        <img src="images/male.svg" alt="M">
+    </button>
+    <button id="female_button" class="gender-button">
+        <img src="images/female.svg" alt="F">
+    </button>
+</div>
+</div>
+
+<div id="page2">
+    <p>Who do you want to be?</p>
+    <div class="attributes"></div>
+    <p class="values_paragraph" id="value1_display">Strength: 50</p>
+    <input type="range" id="value1" class="values_slider" name="value1" min="0" max="100" value="50">
+
+    <p class="values_paragraph" id="value2_display">Speed: 50</p>
+    <input type="range" id="value2" class="values_slider" name="value2" min="0" max="100" value="50">
+
+    <p class="values_paragraph" id="value3_display">Charisma: 50</p>
+    <input type="range" id="value3" class="values_slider" name="value3" min="0" max="100" value="50">
+
+    <p class="values_paragraph" id="value4_display">Intelligence: 50</p>
+    <input type="range" id="value4" class="values_slider" name="value4" min="0" max="100" value="50">
+</div>
+</div>
+
+<div id="page3">
+    <p>Describe your character</p>
+    <div class="description-container">
+        <div class="card suggestions" id="suggestions">
+            <h3>Ideas</h3>
+            <ul>
+                <li>What passions fuel you?</li>
+                <li>What is your purpose?</li>
+                <li>What mysterious origins define your family's?</li>
+                <li>Reveal a hidden strength...</li>
+                <li>Confess a weakness...</li>
+            </ul>
+        </div>
+        <textarea id="description" placeholder="Who do you want to be?"></textarea>
+        <div id="actual_suggestions_container">
+        </div>
+    </div>
+</div>
+
+<p id="iconic_sentence">"</p>
+
+<div id="page4" class="character-container">
+    <div class="left-section">
+        <div class="description">
+            <p id="character_description"></p>
+        </div>
+        <div class="objects_container">
+            <div id="object_icon"></div>
+            <p id="objects"></p>
+        </div>
+        <input type="button" id="playerSubmit" value="Submit">
+    </div>
+    <div class="right-section">
+        <img src="" alt="Character Image" id="character-image">
+        <div class="health_container">
+            <p id="health"></p>
+        </div>
+        <p id="character_appearance"></p>
+        <div class="skills_container">
+        </div>
+    </div>
+</div>
+
+<div id="button-container">
+    <input type="button" id="prev" value="Previous">
+    <input type="button" id="submit" value="Next...">
+    <p href="" id="automatic_character">Or Create a Character for me</p>
+    <input type="button" id="finalSubmit" value="Submit">
+
+    <img src="images/infinity.gif" alt="Infinity GIF" id="logo_animated">
+</div>
+
+<script src="javascript/start.js"></script>
+
+<%- include('partials/footer') -%>

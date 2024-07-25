@@ -1,0 +1,111 @@
+<%- include("partials/header", {css:"css/game.css", title: "InfinityLife: Your Future Self Awaits!" , metaDescription:"Embark on an epic journey through history with infinityLife. Create and evolve your character from ancient Rome to the modern era in this AI-powered historical evolution simulation game. Make strategic decisions, manage resources, and build a lasting legacy. Start your adventure today!"}) %>
+
+<% if (character) { %>
+    <script>
+        var character = <%- JSON.stringify(character).replace(/</g, '\\u003c') %>;
+        console.log(character); // Verify the character object is correctly assigned
+    </script>
+    
+
+    <div id="character-info">
+        <% 
+        const gender = character.gender == 0 ? 'man' : 'woman'; 
+        const images = {
+            charisma: `images/profile/profile_${gender}_charisma.webp`,
+            intelligence: `images/profile/profile_${gender}_intelligence.webp`,
+            strength: `images/profile/profile_${gender}_strength.webp`,
+            speed: `images/profile/profile_${gender}_speed.webp`
+        };
+        let highestValue = 0; 
+        let highestValueImage = ''; 
+    
+        const attributes = {
+            strength: character.strength,
+            speed: character.speed,
+            charisma: character.charisma,
+            intelligence: character.intelligence
+        };
+    
+        for (const key in attributes) {
+            if (attributes[key] > highestValue) {
+                highestValue = attributes[key];
+                highestValueImage = images[key];
+            }
+        }
+    
+        let allEqual = true;
+        for (const key in attributes) {
+            if (attributes[key] !== character.strength) {
+                allEqual = false;
+                break;
+            }
+        }
+    
+        if (allEqual) {
+            highestValueImage = `images/profile/profile_${gender}.webp`;
+        }
+    %>    
+            <img src="<%= highestValueImage %>" alt="Character Image" id="character-image">
+            <div id="character-details">
+                <p id="character-name"><%= character.username %>
+                </p>
+                <div id="character-gender-age-container">
+                    <img src="images/<%= character.gender == 0 ? 'dark_male.svg' : 'dark_female.svg' %>"
+                        alt="Gender Image" id="character-gender">
+                    <p id="character-age">Age: <%= character.age %>
+                    </p>
+                </div>
+            </div>
+    </div>
+    <div class="settings-button">
+        <!-- <button id="settings">⚙️</button> -->
+        <button id="logout">Delete Character</button>
+    </div>
+
+    <div class="stats">
+        <p><span id="money">
+                <%= character.money %>
+            </span>Money 💰</p>
+        <p><span id="fame">
+                <%= character.status %>
+            </span>Status💫</p>
+        <p><span id="relations">
+                <%= character.relations %>
+            </span>Relations 💑</p>
+    </div>
+
+    
+    <div id="chat-container">
+        <div id="prompt-container">
+            <p id="prompt"></p>
+        </div>
+        <div id="chat-box">
+            <div id="messages"></div>
+        </div>
+        <div id="input-container">
+            <input type="text" id="user-input" placeholder="Type your message...">
+            <button id="send-button">Send</button>
+        </div>
+    </div>
+
+    <div class="timeline-container">
+        <div class="timeline">
+            <div class="milestone" data-age="0">0</div>
+            <div class="milestone" data-age="10">10</div>
+            <div class="milestone" data-age="20">20</div>
+            <div class="milestone" data-age="30">30</div>
+            <div class="milestone" data-age="40">40</div>
+            <div class="milestone" data-age="50">50</div>
+        </div>
+    </div>
+
+    <button class="advance-button" id="advance">Advance</button>
+
+    <script src="javascript/game.js"></script>
+    <% } else { %>
+        <p>Character data is not available.</p>
+        <a href="/logout"><button id="logout">Logout</button></a>
+        <% } %>
+
+
+            <%- include('partials/footer') -%>
